@@ -39,11 +39,11 @@ for root, folders, files in os.walk("data/train_xml"):
             target.append(1)
             for elem in selPage(xml_root):
                 page = dict(elem.items())
-                page_heights.append(page['height'])
-                page_widths.append(page['width'])
             for elem in sel(xml_root):
                 signature = dict(elem.items())
                 file_names.append(os.path.basename(file).removesuffix('.xml') + '.tif')
+                page_heights.append(page['height'])
+                page_widths.append(page['width'])
                 cols.append(signature['col'])
                 rows.append(signature['row'])
                 heights.append(signature['height'])
@@ -78,12 +78,15 @@ df_bbox['page_width_scaled'] = scaled_data[6]
 # Reformatting the coordinates to YOLOv5 format
 df_bbox_YOLOv5_data = transform_to_YOLOv5_form(df_bbox)
 
-df_train, df_test = train_test_split(df_bbox, test_size=0.1, random_state=13, shuffle=True)
-df_train, df_val = train_test_split(df_train, test_size=0.2, random_state=13, shuffle=True)
+print(f'###### NUMBER OF EXAMPLES {df_bbox.shape[0]}')
 
-split_data(df_val, 'val')
-split_data(df_train, 'train')
-split_data(df_test, 'test')
+samples = df_bbox.jpg_filename.unique()
+
+df_train, df_val = train_test_split(samples, test_size=0.1, random_state=42, shuffle=True)
+
+print(df_train.shape[0], df_val.shape[0])
+split_data(df_bbox, df_val, 'val')
+split_data(df_bbox, df_train, 'train')
 
 # Saving the dataframes into csv files
 df_bbox.to_csv('data/signatures_bbox_df.csv', index=False)
@@ -98,5 +101,3 @@ print("No. of Training labels", len(os.listdir('data/YOLOv5_formatted_data/label
 print("No. of val images", len(os.listdir('data/YOLOv5_formatted_data/images/val')))
 print("No. of val labels", len(os.listdir('data/YOLOv5_formatted_data/labels/val')))
 
-print("No. of test images", len(os.listdir('data/YOLOv5_formatted_data/images/test')))
-print("No. of test labels", len(os.listdir('data/YOLOv5_formatted_data/labels/test')))

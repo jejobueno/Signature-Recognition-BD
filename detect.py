@@ -13,6 +13,7 @@ from pathlib import Path
 
 import cv2
 import numpy as np
+import pandas as pd
 import torch
 import torch.backends.cudnn as cudnn
 
@@ -30,6 +31,8 @@ from utils.general import apply_classifier, check_img_size, check_imshow, check_
 from utils.plots import Annotator, colors
 from utils.torch_utils import load_classifier, select_device, time_sync
 
+y_result = []
+x_file_name = []
 
 @torch.no_grad()
 def run(weights=ROOT / 'yolov5s.pt',  # model.pt path(s)
@@ -186,9 +189,14 @@ def run(weights=ROOT / 'yolov5s.pt',  # model.pt path(s)
         # Second-stage classifier (optional)
         if classify:
             pred = apply_classifier(pred, modelc, img, im0s)
-
         # Process predictions
+
         for i, det in enumerate(pred):  # per image
+            print(f"\n ####### LEN PRED {len(pred[0])}", pred)
+            if len(pred[0]) > 0:
+               y_result.append(1)
+            else:
+                y_result.append(0)
             seen += 1
             if webcam:  # batch_size >= 1
                 p, s, im0, frame = path[i], f'{i}: ', im0s[i].copy(), dataset.count
@@ -197,6 +205,8 @@ def run(weights=ROOT / 'yolov5s.pt',  # model.pt path(s)
 
             p = Path(p)  # to Path
             save_path = str(save_dir / p.name)  # img.jpg
+            x_file_name.append(os.path.basename(p.name).removesuffix('.tif'))
+            print(f'##### FILES {len(x_file_name)} LAST: {x_file_name[-1]} \n ##### TRAGETS {len(y_result)} LAST: {y_result[-1]} ')
             txt_path = str(save_dir / 'labels' / p.stem) + ('' if dataset.mode == 'image' else f'_{frame}')  # img.txt
             s += '%gx%g ' % img.shape[2:]  # print string
             gn = torch.tensor(im0.shape)[[1, 0, 1, 0]]  # normalization gain whwh
@@ -253,7 +263,8 @@ def run(weights=ROOT / 'yolov5s.pt',  # model.pt path(s)
                             save_path += '.mp4'
                         vid_writer[i] = cv2.VideoWriter(save_path, cv2.VideoWriter_fourcc(*'mp4v'), fps, (w, h))
                     vid_writer[i].write(im0)
-
+        results = pd.DataFrame(zip(x_file_name, y_result), columns=['id','signature'])
+        results.to_csv('results_yolo.csv', index=False)
     # Print results
     t = tuple(x / seen * 1E3 for x in dt)  # speeds per image
     print(f'Speed: %.1fms pre-process, %.1fms inference, %.1fms NMS per image at shape {(1, 3, *imgsz)}' % t)

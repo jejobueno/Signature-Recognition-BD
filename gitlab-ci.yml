@@ -1,0 +1,25 @@
+# This file is a template, and might need editing before it works on your project.
+stages:
+  - build-image
+  - run-image
+
+build-image:
+  stage: build-image
+  script:
+    - docker build -t ${CI_PROJECT_PATH_SLUG} .
+run-image:
+  stage: run-image
+  timeout: 4 hours
+  script:
+    - echo "PROJECT:" ${CI_PROJECT_PATH_SLUG}
+    - mkdir -p ${PWD}/${CI_JOB_ID}
+    - sudo chown -R gitlab-runner  ${PWD}/${CI_JOB_ID}
+    - nvidia-docker run --ipc=host --gpus all -v ${PWD}/${CI_JOB_ID}:/output -v ${PWD}/${CI_JOB_ID}/:/app/runs  ${CI_PROJECT_PATH_SLUG}
+  rules:
+    - if: $CI_COMMIT_BRANCH
+      exists:
+        - Dockerfile
+  artifacts:
+    paths:
+      - ${PWD}/${CI_JOB_ID}/*
+
