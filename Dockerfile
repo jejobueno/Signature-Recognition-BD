@@ -24,7 +24,3 @@ RUN pip3 install torch==1.9.1+cu111 torchvision==0.10.1+cu111 torchaudio==0.9.1 
 RUN mkdir /app/runs
 
 CMD python3.7 train.py --img 640 --batch 16 --epochs 300 --data custom_dataset.yaml --weights yolov5s.pt --cache
-
-CMD python detect.py --weights ./runs/train/exp/weights/best.pt --img 640 --conf 0.30 --source ./data/test
- --nosave
-

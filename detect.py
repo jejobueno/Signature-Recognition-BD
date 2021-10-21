@@ -263,7 +263,7 @@ def run(weights=ROOT / 'yolov5s.pt',  # model.pt path(s)
                             save_path += '.mp4'
                         vid_writer[i] = cv2.VideoWriter(save_path, cv2.VideoWriter_fourcc(*'mp4v'), fps, (w, h))
                     vid_writer[i].write(im0)
-        results = pd.DataFrame(zip(x_file_name, y_result), columns=['id','signature'])
+        results = pd.DataFrame(zip(x_file_name, y_result), columns=['id','Expected'])
         results.to_csv('results_yolo.csv', index=False)
     # Print results
     t = tuple(x / seen * 1E3 for x in dt)  # speeds per image
