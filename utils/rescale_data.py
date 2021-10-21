@@ -4,7 +4,7 @@ import cv2
 
 BASE_DIR = os.path.join('data', 'train')
 
-NEW_DIR = os.path.join('data', 'YOLOv5_formatted_data', 'images', 'jpg_scaled_images')
+NEW_DIR = os.path.join('data', 'images', 'YOLOv5_formatted_data', 'images', 'jpg_scaled_images')
 
 
 def scale_image(df):

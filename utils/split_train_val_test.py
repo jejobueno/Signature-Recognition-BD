@@ -7,7 +7,7 @@ from typing import List
 import numpy as np
 import pandas as pd
 
-BASE_DIR = os.path.join('data', 'YOLOv5_formatted_data')
+BASE_DIR = os.path.join('data', 'images', 'YOLOv5_formatted_data')
 
 SCR_IMG_PATH = os.path.join(BASE_DIR, 'images')
 SCR_LAB_PATH = os.path.join(BASE_DIR, 'labels')

@@ -82,7 +82,7 @@ print(f'###### NUMBER OF EXAMPLES {df_bbox.shape[0]}')
 
 samples = df_bbox.jpg_filename.unique()
 
-df_train, df_val = train_test_split(samples, test_size=0.1, random_state=42, shuffle=True)
+df_train, df_val = train_test_split(samples, test_size=0.20, random_state=13, shuffle=True)
 
 print(df_train.shape[0], df_val.shape[0])
 split_data(df_bbox, df_val, 'val')
@@ -93,11 +93,11 @@ df_bbox.to_csv('data/signatures_bbox_df.csv', index=False)
 df_signatures.to_csv('data/signatures_df.csv', index=False)
 
 print("No. of TOTAL training images", len(os.listdir('data/train')))
-print("No. of TOTAL signed training images", len(os.listdir('data/YOLOv5_formatted_data/images/jpg_scaled_images')))
+print("No. of TOTAL signed training images", len(os.listdir('data/images/YOLOv5_formatted_data/images/jpg_scaled_images')))
 #
-print("No. of Training images", len(os.listdir('data/YOLOv5_formatted_data/images/train')))
-print("No. of Training labels", len(os.listdir('data/YOLOv5_formatted_data/labels/train')))
+print("No. of Training images", len(os.listdir('data/images/YOLOv5_formatted_data/images/train')))
+print("No. of Training labels", len(os.listdir('data/images/YOLOv5_formatted_data/labels/train')))
 
-print("No. of val images", len(os.listdir('data/YOLOv5_formatted_data/images/val')))
-print("No. of val labels", len(os.listdir('data/YOLOv5_formatted_data/labels/val')))
+print("No. of val images", len(os.listdir('data/images/YOLOv5_formatted_data/images/val')))
+print("No. of val labels", len(os.listdir('data/images/YOLOv5_formatted_data/labels/val')))
 
