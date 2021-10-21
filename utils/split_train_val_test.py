@@ -2,6 +2,7 @@ import os
 
 # Apply function
 import shutil
+from typing import List
 
 import numpy as np
 import pandas as pd
@@ -12,11 +13,11 @@ SCR_IMG_PATH = os.path.join(BASE_DIR, 'images')
 SCR_LAB_PATH = os.path.join(BASE_DIR, 'labels')
 
 
-def split_data(df: pd.DataFrame, dir: str):
+def split_data(df: pd.DataFrame, filenames: List, dir: str):
     DIR_IMG_PATH = os.path.join(SCR_IMG_PATH, dir)
     DIR_LAB_PATH = os.path.join(SCR_LAB_PATH, dir)
 
-    for filename in df.jpg_filename.to_list():
+    for filename in filenames:
         yolo_list = []
 
         for _, row in df[df.jpg_filename == filename].iterrows():
