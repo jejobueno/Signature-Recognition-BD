@@ -31,11 +31,21 @@ of the cases the prediction will be within a respectable range.
 ## Installation
 Clone the repository:
 ```
-git clone https://github.com/jejobueno/ImmoEliza-Regressions
+https://github.com/jejobueno/Signature-Recognition-BD.git
+``` 
+ 
+Install the requirements:
+```
+pip install -r requirements.txt
 ``` 
 
 ## Usage
-Run main.py.
+  
+
+To train the model you could use the following command:
+```
+python train.py --img 640 --batch 16 --epochs 300 --data custom_dataset.yaml --weights yolov5s.pt --cache
+```   
 
 ## Output
 When you run the program, you will get: 
