@@ -49,11 +49,16 @@ python train.py --img 640 --batch 16 --epochs 300 --data custom_dataset.yaml --w
 ```   
 
 ## Output
-When you run the program, you will get: 
+When you run the program, you will get a csv with the boundry boxes coordinates and confidences called `bboxes.csv`, also another csv file marking if the images contains any signature or not calles `results_yolo.csv`
 
-## How it works
+If you runned the command wwithour the argument `--nosave` you'll find also insde the folder `runs\detect\exp\` the images with the signatures detected as following image
 
+![image](https://user-images.githubusercontent.com/34608190/138463807-7ec615ee-2b93-4e83-8291-828c151b9905.png)
+
+This model works with a 94,4382% of accuracy detecting signatures on test set provided by the client.
 ## Examples
+![image](https://user-images.githubusercontent.com/34608190/138463860-1aca4e38-4533-4d8f-a977-cacc8067e5cd.png)
+![image](https://user-images.githubusercontent.com/34608190/138463887-f8014e0e-02fd-4929-a8a8-163c7fda6987.png)
 
 
 ## Authors
