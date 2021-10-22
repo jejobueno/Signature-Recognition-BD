@@ -10,7 +10,7 @@
 
 
 # Signature Recognition using YOLOv5
-Machine learning model to predict prices on Belgium's real estate sales.
+Deep Learning model trained to detect signatures from diferent documents.
 
 ## Table of contents
 [Description](#Description)  
@@ -22,12 +22,7 @@ Machine learning model to predict prices on Belgium's real estate sales.
 [Authors](#Authors)
 
 ## Description
-The model predicts the prices of properties in Belgium, based on data that were gathered in a previous scraping project.
-In relation with the postal code, the state of the construction, the property subtype (apartment, studio, villa, chalet, ...),
-and existance of a fireplace, terrace, garden and/or fully equiped kitchen, an estimate of the asking price is made.
-
-The accuracy of the model is 0.89, which means that there is always a possibility for outliers (less then 11 %). More importantly: in 89 %
-of the cases the prediction will be within a respectable range.
+YOLOv5 model training to detect signatures on documents, it was trained with annotated documents transformed to jpg and addapting their annotations from an .xml format to a .txt normalizing and transpolating the coordinates to the yolo format. 
 
 ## Installation
 Clone the repository:
