@@ -43,6 +43,13 @@ To train the model you could use the following command:
 python train.py --img 640 --batch 16 --epochs 300 --data custom_dataset.yaml --weights yolov5s.pt --cache
 ```   
 
+To detect signatures from a determinated folder user the following command:
+```
+python detect.py --weights ./runs/train/exp/weights/best.pt --img 640 --conf 0.60 --source ./data/test
+```   
+
+This command will read all files from the folder path `/data/test` and mark all the detected signatures with their confidence score inside the `runs/detect/exp/` folder. If you don't want them just add the argument `--nosave`
+
 ## Output
 When you run the program, you will get a csv with the boundry boxes coordinates and confidences called `bboxes.csv`, also another csv file marking if the images contains any signature or not calles `results_yolo.csv`
 
