@@ -2,6 +2,8 @@
 [![pre-commit.ci status](https://results.pre-commit.ci/badge/github/jejobueno/ImmoEliza-Regressions/main.svg)](https://results.pre-commit.ci/latest/github/jejobueno/ImmoEliza-Regressions/main) [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 <div align = "center">
 
+  ![image](https://user-images.githubusercontent.com/34608190/138427104-c02b202d-f95a-4f13-bd12-d3e1f109ed3f.png)
+
 <h3>Signature Recognition Use Case for B&D</h3>
 
 
